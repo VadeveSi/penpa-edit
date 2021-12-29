@@ -11696,4 +11696,107 @@ class Puzzle {
             }
         }
     }
+
+    json_solver(type = "none") {
+        // Init the json.
+        const json = {'gridType': this.gridtype,
+                      'nx': this.nx.toString(),
+                      'ny': this.ny.toString(),
+                      'size': this.size.toString(),
+                      'theta': this.theta.toString(),
+                      'reflect': this.reflect.toString(),
+                      'canvasx': this.canvasx,
+                      'canvasy': this.canvasy,
+                      'centerN': this.center_n,
+                      'centerN0': this.center_n0,
+                      'sudoku': this.sudoku};
+
+        // Puzzle title
+        let titleinfo = document.getElementById("saveinfotitle").value;
+        json['titleInfo'] = titleinfo.replace(/,/g,'%2C');
+
+        // Puzzle author
+        let authorinfo = document.getElementById("saveinfoauthor").value;
+        json['authorInfo'] = authorinfo.replace(/,/g, '%2C');
+
+        // Puzzle Source
+        json['infoSource'] = document.getElementById("saveinfosource").value;
+
+        // Puzzle Rules
+        let ruleinfo = document.getElementById("saveinforules").value;
+        json['ruleInfo'] = ruleinfo.replace(/\n/g, '%2D').replace(/,/g, '%2C').replace(/&/g, '%2E').replace(/=/g, '%2F');
+
+        // Border button status
+        json['edgeButton'] = document.getElementById('edge_button').value;
+
+        json['space'] = this.space;
+
+        var qr = this.pu_q.command_redo.__a;
+        var qu = this.pu_q.command_undo.__a;
+        this.pu_q.command_redo.__a = [];
+        this.pu_q.command_undo.__a = [];
+        json['pu_q'] = this.pu_q;
+        this.pu_q.command_redo.__a = qr;
+        this.pu_q.command_undo.__a = qu;
+
+
+        var list = [this.centerlist[0]];
+        for (var i = 1; i < this.centerlist.length; i++) {
+            list.push(this.centerlist[i] - this.centerlist[i - 1]);
+        }
+        json['list'] = list;
+
+        // Copy the tab selector modes
+        let user_choices = getValues('mode_choices');
+        json['userChoices'] = user_choices;
+
+        // save answer check settings
+        var settingstatus = document.getElementById("answersetting").getElementsByClassName("solcheck");
+        var answersetting = {};
+        for (var i = 0; i < settingstatus.length; i++) {
+            if (settingstatus[i].checked) {
+                answersetting[settingstatus[i].id] = true;
+            } else {
+                answersetting[settingstatus[i].id] = false;
+            }
+        }
+        json['answerSetting'] = answersetting;
+
+        // Version
+        json['version'] = this.version;
+
+        // Save submode/style/combi settings
+        json['mode'] = this.mode;
+
+        // Custom Colors
+        // if (document.getElementById("custom_color_opt").value === "2") {
+        //     text += JSON.stringify("true") + "\n"
+        // } else {
+        //     text += JSON.stringify("false") + "\n"
+        // }
+        qr = this.pu_q_col.command_redo.__a;
+        qu = this.pu_q_col.command_undo.__a;
+        this.pu_q_col.command_redo.__a = [];
+        this.pu_q_col.command_undo.__a = [];
+        json['pu_q_col'] = this.py_q_col;
+        this.pu_q_col.command_redo.__a = qr;
+        this.pu_q_col.command_undo.__a = qu;
+
+        // save answer check settings
+        var settingstatus = document.getElementById("answersetting").getElementsByClassName("solcheck_or");
+        var answersetting = {};
+        for (var i = 0; i < settingstatus.length; i++) {
+            if (settingstatus[i].checked) {
+                answersetting[settingstatus[i].id] = true;
+            } else {
+                answersetting[settingstatus[i].id] = false;
+            }
+        }
+        json['answerSettingOr'] = answersetting;
+
+        // Save genre tags
+        json['genre_tags'] = $('#genre_tags_opt').select2('val');
+
+        return json;
+    }
 }

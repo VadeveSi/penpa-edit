@@ -1050,6 +1050,10 @@ onload = function() {
                 newboard();
                 e.preventDefault();
                 break;
+            case "solve":
+                solve();
+                e.preventDefault();
+                break;
             case "rotation":
                 rotation();
                 e.preventDefault();
