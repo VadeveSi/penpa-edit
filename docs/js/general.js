@@ -9,7 +9,8 @@ function boot() {
     if (urlParam) {
         load(urlParam);
     } else {
-        create();
+        load('m=edit&p=7VVBb5tKEL77V1R73gM7mDVwS9O0lzR6aVJFEbIi7JDECjYpxs0Tlv97vtkd18bm6Z3al8MTZvj4GGa+ZfdbL3+s8rrQCY4w1oE2OMI4cGc85F8gx/WsKYv0gz5ZNU9VDaA16Ye8XBaDTHLGg3WbpO2lbr+kmTJKK8Jp1Fi3l+m6/Zq2Z7q9wiOlDbhzn0SAZzt4454zOvWkCYAvBAPeAk5n9bQs7s4981eatddacZ+P7m2Gal79LJTo4PtpNZ/MmJjkDYayfJq9yJPl6r56XkmuGW90e+LlXvXIDXdyGXq5jHrk8ih+s9xkvNngs3+D4Ls0Y+3fd/AqXSNeuGhcvHXxs4vk4jVSdRu6+MnFwMXIxXOXc5aulYmtNkmiUsKUJokmQw7jqokijynSFMYeYz1RZDyOjCY79NgONY1GHo9GmpLA4wSrLgglh/OlvkV9u+XDbh0rfS36WivYAkt9i/pW9FjosV4/rtCw7Ruir7yLVY/73bux5ETcS2oOoS0SDYSaQxmjgQaSXgE0G6/NxOgVyFhC1A8ln8CHUp/rkGgj9N3WIYyFpC9/WxKdBD2/vjm+CW318FywfkzajZu6UxeHLlo3pSNeG39iyfyrhgzD5g1n/4jeFzMeZNjV1LIq75ar+iGfwqNu04MNwS1W80lRd6iyql7K2aKbN3tcVHXR+4jJ4v6xL39S1fcH1V/zsuwQfgPvUH636VBNja1k7z6v6+q1w8zz5qlD7G07nUrFoukKaPKuxPw5P+g23415M1B/K3dmbGttwv//NP6jPw03EW5S1LvYDd6FBrdeq7rX7KB7/A6219fCH1kb/JGJueGxj8H2WBnsoZtBHRsa5JGnwf2DrbnqobNZ1aG5udWRv7nVvsWz8Rs=');
+        // create();
     }
 }
 
@@ -115,6 +116,7 @@ function create() {
     });
 
     pu.redraw();
+
 }
 
 function getCookie(name) {
@@ -1539,6 +1541,7 @@ function import_url() {
     if (urlstring !== "") {
         if (urlstring.indexOf("/penpa-edit/?") !== -1) {
             urlstring = urlstring.split("/penpa-edit/?")[1];
+            console.log(urlstring);
             load(urlstring, 'local');
             document.getElementById("modal-load").style.display = 'none';
             if (this.usertab_choices.length > 2) { // If none selected, usertab_chocies = [] (size 2)
