@@ -1050,6 +1050,18 @@ onload = function() {
                 newboard();
                 e.preventDefault();
                 break;
+            case "load1":
+                load_board(1);
+                e.preventDefault();
+                break;
+            case "load2":
+                load_board(2);
+                e.preventDefault();
+                break;
+            case "load3":
+                load_board(3);
+                e.preventDefault();
+                break;
             case "solve":
                 solve();
                 e.preventDefault();
